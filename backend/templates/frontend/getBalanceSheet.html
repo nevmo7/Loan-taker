@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loan taker</title>
+    </head>
+
+    <body>
+        <h3>
+            Enter balance sheet no to retrive
+        </h3>
+    
+        <form method="get" action="getBalanceSheet">
+            <label>Business number</label>
+            <select id="companies" name="companyName">
+                <option value="A">Company A</option>
+                <option value="B">Company B</option>
+                <option value="C">Company C</option>
+            </select>
+            <label>Loan amount</label><input name="loanAmt" type="number"></input>
+            <button type="submit" value="submit">Submit</button>
+        </form>
+
+        <h4>Please review your business application for {{companyName}}</h4>
+        
+        {% for a in balanceSheet %}
+        <div class="balanceSheet">
+            <h4>Year: {{ a.year }}</h4>
+            <h4>Month: {{ a.month }}</h4>
+            <h4>Profit or Loss: {{ a.profitOrLoss }}</h4>
+            <h4>Assets value: {{ a.assetsValue }}</h4>
+            <hr>
+        </div>
+        {% endfor %}
+
+        <form action="getLoanApproval" method="get">
+            <input type = "hidden" name = "companyName" value = {{companyName}} />
+            <input type = "hidden" name = "loanAmt" value = {{loanAmt}} />
+            <button type="submit" value="submit">Submit application</button>
+        </form>
+    </body>
+</html>
